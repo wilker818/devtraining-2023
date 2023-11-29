@@ -1,35 +1,43 @@
-import {Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, Res} from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { CoursesService } from './courses.service';
 
 @Controller('courses') //prfixo
 export class CoursesController {
+  constructor(private readonly cousersService: CoursesService) {}
 
-    @Get('list') // courses/list  aqui o list seria um path
-    findAll(@Res() response) {
-        return response.status(200).json({
-            message: "Listagem de cursos"
-        });
-    }
+  @Get('list') // courses/list  aqui o list seria um path
+  findAll() {
+    return this.cousersService.findAll();
+  }
 
-    @Get('list/:id') // courses/list/20(:id)  aqui é a listagem especifica de um item por ID
-    findOne(@Param() params: any) {
-        return `Curso com ID ${params.id}`
-    }
+  @Get('list/:id') // courses/list/20(:id)  aqui é a listagem especifica de um item por ID
+  findOne(@Param() params: any) {
+    return this.cousersService.findOne(+params.id);
+  }
 
-    @HttpCode(201)
-    @Post()
-    create(@Body() body: object) {
-        return body;
-    }
+  @HttpCode(201)
+  @Post()
+  create(@Body() body: any) {
+    return this.cousersService.create(body);
+  }
 
-    @Patch('list/:id')
-    update(@Param('id') id: string, @Body() body) {
-        console.log("teste", body)
-        return `Update course with ID ${id}`
-    }
+  @Put('list/:id')
+  update(@Param('id') id: number, @Body() body) {
+    return this.cousersService.update(+id, body);
+  }
 
-    @HttpCode(204)
-    @Delete('list/:id')
-    remove(@Param('id') id: string) {
-        return `Delete course with ID ${id}`
-    }
+  @HttpCode(204)
+  @Delete('list/:id')
+  remove(@Param('id') id: number) {
+    return this.cousersService.remove(+id);
+  }
 }
