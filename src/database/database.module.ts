@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { DataSourceOptions } from 'typeorm';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Course } from '../courses/entities/courses.entity';
 
 // Opções de configuração para o TypeORM
 export const dataSourceOptions: DataSourceOptions = {
@@ -10,7 +11,7 @@ export const dataSourceOptions: DataSourceOptions = {
   username: 'postgres', // Nome de usuário do banco de dados
   password: 'docker', // Senha do banco de dados
   database: 'devtraining', // Nome do banco de dados
-  entities: [], // Entidades a serem incluídas na configuração (ainda não especificadas)
+  entities: [Course], // Entidades a serem incluídas na configuração (ainda não especificadas)
   synchronize: true, // Sincroniza automaticamente as entidades com o banco de dados (apenas para desenvolvimento)
 };
 
