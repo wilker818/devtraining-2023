@@ -23,7 +23,7 @@ export class CoursesController {
 
   @Get('list/:id') // courses/list/20(:id)  aqui é a listagem especifica de um item por ID
   findOne(@Param() params: any) {
-    return this.cousersService.findOne(+params.id);
+    return this.cousersService.findOne(params.id);
   }
 
   @HttpCode(201)
@@ -34,12 +34,12 @@ export class CoursesController {
 
   @Put('list/:id')
   update(@Param('id') id: number, @Body() updateCourseDTO: UpdateCourseDTO) {
-    return this.cousersService.update(+id, updateCourseDTO);
+    return this.cousersService.update(id, updateCourseDTO);
   }
 
   @HttpCode(204)
   @Delete('list/:id')
   remove(@Param('id') id: number) {
-    return this.cousersService.remove(+id);
+    return this.cousersService.remove(id);
   }
 }

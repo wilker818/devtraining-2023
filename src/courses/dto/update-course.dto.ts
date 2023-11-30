@@ -1,5 +1,7 @@
-export class UpdateCourseDTO {
-  readonly name?: string;
-  readonly description?: string;
-  readonly tags?: string[];
-}
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateCourseDTO } from './create-course.dto';
+
+export class UpdateCourseDTO extends PartialType(CreateCourseDTO) {}
+
+//cria uma nova instacia baseada no createdcoursedto
+// mais de forma parcial na qual todo os campos não precisa ser obrigatorio
